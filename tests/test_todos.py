@@ -1,17 +1,23 @@
-import pytest
 from fastapi.testclient import TestClient
 from app.main import app
+import pytest
 
 client = TestClient(app)
 
-def test_read_root():
+def test_root_endpoint():
     response = client.get("/")
     assert response.status_code == 200
+    assert "Todo API" in response.json()["message"]
 
 def test_create_todo():
-    response = client.post("/api/todos/", json={
-        "title": "Test Todo",
-        "description": "This is a test"
-    })
+    response = client.post(
+        "/api/todos/",
+        json={
+            "title": "Test Todo from CI",
+            "description": "Testing CI pipeline"
+        }
+    )
     assert response.status_code == 201
-    assert response.json()["title"] == "Test Todo"
+    data = response.json()
+    assert data["title"] == "Test Todo from CI"
+    assert "id" in data

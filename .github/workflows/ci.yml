@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: '3.12'
 
     - name: Install dependencies
       run: |
@@ -24,11 +24,11 @@ jobs:
         pip install -r requirements.txt
         pip install pytest httpx
 
-    - name: Run tests
+    - name: Run Tests
       run: |
-        pytest tests/ -v
+        pytest tests/ --verbose
 
-    - name: Lint with ruff (optional but recommended)
+    - name: Check Code Style (Ruff)
       run: |
         pip install ruff
-        ruff check .
+        ruff check . --output-format=github
