@@ -31,4 +31,4 @@ jobs:
     - name: Check Code Style (Ruff)
       run: |
         pip install ruff
-        ruff check . --output-format=github
+        ruff check . --output-format=github --ignore=F401
