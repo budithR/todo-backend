@@ -19,6 +19,7 @@ app.add_middleware(
 
 app.include_router(todo_router)
 
+
 @app.get("/")
 def root():
     return {"message": "Todo API is working! Visit /docs for Swagger UI"}
